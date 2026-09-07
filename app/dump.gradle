@@ -1,0 +1,68 @@
+import java.net.URLClassLoader
+
+task dumpWorshipData {
+    doLast {
+        def classesDir = file("build/intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes")
+        def url = classesDir.toURI().toURL()
+        def classLoader = new URLClassLoader([url] as URL[], this.class.classLoader)
+        def worshipDataClass = classLoader.loadClass("com.example.data.WorshipData")
+        def instance = worshipDataClass.getDeclaredField("INSTANCE").get(null)
+        
+        def outputFile = file("WorshipData_restored.kt")
+        def out = new FileWriter(outputFile)
+        
+        out.write("package com.example.data\n\n")
+        out.write("import java.time.DayOfWeek\n\n")
+        out.write("object WorshipData {\n")
+        
+        def escapeString = { str ->
+            return '"""' + str + '"""'
+        }
+        
+        // dailyPrayers
+        out.write("    val dailyPrayers = mapOf(\n")
+        def dailyPrayers = worshipDataClass.getMethod("getDailyPrayers").invoke(instance)
+        dailyPrayers.each { k, v ->
+            out.write("        DayOfWeek.${k.name()} to Pair(${escapeString(v.getFirst())}, ${escapeString(v.getSecond())}),\n")
+        }
+        out.write("    )\n")
+        
+        def dumpList = { name ->
+            out.write("    val ${name} = listOf(\n")
+            def list = worshipDataClass.getMethod("get${name.capitalize()}").invoke(instance)
+            list.each { v ->
+                out.write("        Pair(${escapeString(v.getFirst())}, ${escapeString(v.getSecond())}),\n")
+            }
+            out.write("    )\n")
+        }
+        
+        dumpList("taqeebat")
+        dumpList("munajat")
+        dumpList("tasbeehat")
+        dumpList("azkarList")
+        dumpList("ziyarats")
+        dumpList("ziyaratsOfDays")
+        
+        // monthlyDeeds
+        out.write("    val monthlyDeeds = mapOf(\n")
+        def monthlyDeeds = worshipDataClass.getMethod("getMonthlyDeeds").invoke(instance)
+        monthlyDeeds.each { k, vList ->
+            out.write("        ${escapeString(k)} to listOf(\n")
+            vList.each { v ->
+                out.write("            Pair(${escapeString(v.getFirst())}, ${escapeString(v.getSecond())}),\n")
+            }
+            out.write("        ),\n")
+        }
+        out.write("    )\n")
+        
+        dumpList("sahifaSajjadiya")
+        dumpList("generalPrayers")
+        dumpList("salawatsOnHujaj")
+        dumpList("ahlAlBaytPrayers")
+        dumpList("concisePrayers")
+        
+        out.write("}\n")
+        out.close()
+        println "Dumped successfully!"
+    }
+}

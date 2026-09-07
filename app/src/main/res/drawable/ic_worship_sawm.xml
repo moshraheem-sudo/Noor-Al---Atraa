@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Gold Crescent Moon -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M22,34 C15.37,34 10,28.63 10,22 C10,17.27 12.75,13.19 16.94,11.08 C13.31,13.37 11,17.41 11,22 C11,28.08 15.92,33 22,33 C24.16,33 26.17,32.38 27.87,31.33 C26.24,33 24.23,34 22,34 Z" />
+    
+    <!-- Deep Navy Fork -->
+    <path
+        android:fillColor="#0F2C59"
+        android:strokeColor="#0F2C59"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M28,12 V20 C28,22 29,23 30,23 V36 H31 V23 C32,23 33,22 33,20 V12 M29.5,12 V18 M31.5,12 V18" />
+
+    <!-- Deep Navy Spoon -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M37,12 C35.5,12 34.5,14 34.5,17 C34.5,20 35.5,22 37,22 C38.5,22 39.5,20 39.5,17 C39.5,14 38.5,12 37,12 Z M36.5,22 V36 H37.5 V22 Z" />
+</vector>

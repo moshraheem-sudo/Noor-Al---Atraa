@@ -1,0 +1,37 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Subtle Gold Ground Line -->
+    <path
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M16,36 H38" />
+
+    <!-- Person Praying (Kneeling/Tashahhud posture) -->
+    <!-- Head -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M31.5,15.5 A4.5,4.5 0 1,1 31.49,15.5" />
+    
+    <!-- Body and Legs -->
+    <path
+        android:fillColor="#0F2C59"
+        android:strokeColor="#0F2C59"
+        android:strokeWidth="1.5"
+        android:strokeLineJoin="round"
+        android:pathData="M23,35 C23,32 23,27 25,23 C27,19 32,20 32,24 C32,26 30.5,29 29.5,31 L33,31 C33.5,31 34,31.5 34,32 C34,32.5 33.5,33 33,33 L29,33 C28,34.5 25,35 23,35 Z" />
+
+    <!-- Arm / Hands resting on knees -->
+    <path
+        android:fillColor="#0F2C59"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M27.5,21.5 C29,26 31,29 33,29" />
+</vector>

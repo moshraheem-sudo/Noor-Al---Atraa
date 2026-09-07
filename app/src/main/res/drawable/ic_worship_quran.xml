@@ -1,0 +1,76 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Rehal (Wooden Stand) Legs -->
+    <path
+        android:fillColor="#001533"
+        android:pathData="M 60,92 L 100,110 L 90,118 L 60,102 Z" />
+    <path
+        android:fillColor="#001F4D"
+        android:pathData="M 60,92 L 20,110 L 30,118 L 60,102 Z" />
+    <!-- Stand Gold Tips -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M 100,110 L 90,118 L 88,116 L 98,108 Z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M 20,110 L 30,118 L 32,116 L 22,108 Z" />
+
+    <!-- Outer Cover Base (Deep Navy) -->
+    <path
+        android:fillColor="#001F4D"
+        android:pathData="M 60,95 C 40,90 20,75 10,60 L 25,15 C 35,30 48,38 60,42 Z" />
+    <path
+        android:fillColor="#001533"
+        android:pathData="M 60,95 C 80,90 100,75 110,60 L 95,15 C 85,30 72,38 60,42 Z" />
+
+    <!-- Gold Cover Trim -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M 60,90 C 42,85 24,71 15,58 L 28,21 C 37,34 48,41 60,44 L 60,48 C 45,45 32,36 21,22 L 9,60 C 18,74 38,89 60,95 Z" />
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M 60,90 C 78,85 96,71 105,58 L 92,21 C 83,34 72,41 60,44 L 60,48 C 75,45 88,36 99,22 L 111,60 C 102,74 82,89 60,95 Z" />
+
+    <!-- Page Edges (Gold Block) -->
+    <path
+        android:fillColor="#DAA520"
+        android:pathData="M 60,84 C 44,79 28,66 20,55 L 31,24 C 40,36 50,42 60,45 Z" />
+    <path
+        android:fillColor="#B8860B"
+        android:pathData="M 60,84 C 76,79 92,66 100,55 L 89,24 C 80,36 70,42 60,45 Z" />
+
+    <!-- Top Pages (White) -->
+    <path
+        android:fillColor="#FDFBF7"
+        android:pathData="M 60,79 C 46,74 31,62 24,53 L 34,27 C 42,38 52,44 60,46 Z" />
+    <path
+        android:fillColor="#EAE5D9"
+        android:pathData="M 60,79 C 74,74 89,62 96,53 L 86,27 C 78,38 68,44 60,46 Z" />
+
+    <!-- Blue Text Lines (Left Page) -->
+    <path android:strokeColor="#3B719F" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M 36,40 C 44,46 52,50 56,51" />
+    <path android:strokeColor="#3B719F" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M 34,48 C 42,54 50,58 54,59" />
+    <path android:strokeColor="#3B719F" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M 32,56 C 40,62 48,66 52,67" />
+    <path android:strokeColor="#3B719F" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M 30,64 C 38,70 46,74 50,75" />
+
+    <!-- Blue Text Lines (Right Page) -->
+    <path android:strokeColor="#3B719F" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M 84,40 C 76,46 68,50 64,51" />
+    <path android:strokeColor="#3B719F" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M 86,48 C 78,54 70,58 66,59" />
+    <path android:strokeColor="#3B719F" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M 88,56 C 80,62 72,66 68,67" />
+    <path android:strokeColor="#3B719F" android:strokeWidth="3" android:strokeLineCap="round" android:pathData="M 90,64 C 82,70 74,74 70,75" />
+
+    <!-- Center Spine Details -->
+    <path
+        android:strokeColor="#C59310"
+        android:strokeWidth="2"
+        android:pathData="M 60,79 L 60,46" />
+    <path
+        android:fillColor="#001F4D"
+        android:strokeColor="#FFD700"
+        android:strokeWidth="1.5"
+        android:pathData="M 55,87 C 55,83 65,83 65,87 C 65,91 55,91 55,87 Z" />
+</vector>

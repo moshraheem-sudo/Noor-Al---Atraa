@@ -1,0 +1,8 @@
+{
+  "name": "مواقيت الصلاة",
+  "description": "تطبيق مواقيت الصلاة وفق مركز الكفيل للثقافة والإعلام وحقيبة المؤمن مع تحديد المدن والموقع الدقيق عبر GPS والتقويم الهجري والميلادي",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "name": " Noor Al-Atra v4.20.0",
+  "description": "Information and dates regarding the Prophet and his household.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

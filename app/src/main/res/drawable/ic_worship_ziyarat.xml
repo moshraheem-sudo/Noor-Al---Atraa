@@ -1,0 +1,77 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Base / Shrine Structure in Deep Navy -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M14,29 H34 V41 H14 Z" />
+
+    <!-- Shrine Door (Arch with Gold Rim and Navy/Gold interior) -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M21,41 V34 C21,32 27,32 27,34 V41 Z" />
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M22,41 V35 C22,33.5 26,33.5 26,35 V41 Z" />
+
+    <!-- Central Majestic Dome in Deep Navy -->
+    <path
+        android:fillColor="#0F2C59"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1"
+        android:pathData="M16,29 C16,21 21,17 24,13 C27,17 32,21 32,29 Z" />
+
+    <!-- Crescent on Central Dome (Gold) -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M23.5,13 V10 H24.5 V13 Z" />
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M24,7.5 C24.8,7.5 25.5,8.2 25.5,9 C25.5,9.8 24.8,10.5 24,10.5 C23.2,10.5 22.5,9.8 22.5,9 C22.5,8.2 23.2,7.5 24,7.5 M24.5,8 C24.1,8.3 23.8,8.8 23.8,9.2 C23.8,9.6 24.1,10 24.5,10.2 C23.8,10.1 23.2,9.6 23.2,9.1 C23.2,8.6 23.8,8.1 24.5,8 Z" />
+
+    <!-- Left Minaret (Slender navy shaft, gold balcony, gold peak) -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M8,18 H12 V41 H8 Z" />
+    <!-- Left Balcony -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M7,23 H13 V25 H7 Z" />
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M7,34 H13 V36 H7 Z" />
+    <!-- Left Minaret Cap/Spire -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M8,18 L10,13 L12,18 Z" />
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M9.5,13 H10.5 V10 H9.5 Z" />
+
+    <!-- Right Minaret (Slender navy shaft, gold balcony, gold peak) -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M36,18 H40 V41 H36 Z" />
+    <!-- Right Balcony -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M35,23 H41 V25 H35 Z" />
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M35,34 H41 V36 H35 Z" />
+    <!-- Right Minaret Cap/Spire -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M36,18 L38,13 L40,18 Z" />
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M37.5,13 H38.5 V10 H37.5 Z" />
+
+    <!-- Ground / Foundation Line -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M5,41 H43 V42.5 H5 Z" />
+</vector>

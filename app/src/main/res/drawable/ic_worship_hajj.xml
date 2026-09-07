@@ -1,0 +1,38 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Kaaba Body (Isometric) -->
+    <!-- Left Face (Dark Navy) -->
+    <path
+        android:fillColor="#081830"
+        android:pathData="M24,37 L10,32 V19 L24,24 Z" />
+    <!-- Right Face (Deep Navy) -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M24,37 L38,32 V19 L24,24 Z" />
+    <!-- Top Face (Slightly lighter navy or dark) -->
+    <path
+        android:fillColor="#1E3A8A"
+        android:pathData="M24,11 L38,16 L24,21 L10,16 Z" />
+
+    <!-- Gold Kiswa Band (Left) -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M10,23 L24,28 V25 L10,20 Z" />
+
+    <!-- Gold Kiswa Band (Right) -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M24,28 L38,23 V20 L24,25 Z" />
+
+    <!-- Gold Door Outline (Right Face) -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M27,27.5 V33.5 L31,32.5 V26 Z" />
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M27.5,28 V33 L30.5,32 V26.5 Z" />
+</vector>

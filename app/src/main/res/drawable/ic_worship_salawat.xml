@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Right Hand -->
+    <path
+        android:fillColor="#0F2C59"
+        android:strokeColor="#0F2C59"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:pathData="M26,38 C26,32 25,29 25,23 C25,20 27,15 28.5,15 C29.5,15 30.5,16 30.5,18 L31,23 C31,23 32,16.5 33,16.5 C34,16.5 34.5,17.5 34.5,19 L34.5,23 C34.5,23 36,18 37,18 C38,18 38.5,19 38.5,20.5 L37.5,28 C37,32 34,36 31,38 Z" />
+    
+    <!-- Right Hand Inner Lines (Gold) -->
+    <path
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M31,23 V28 M34.5,23 V27" />
+
+    <!-- Left Hand -->
+    <path
+        android:fillColor="#0F2C59"
+        android:strokeColor="#0F2C59"
+        android:strokeWidth="1"
+        android:strokeLineJoin="round"
+        android:pathData="M22,38 C22,32 23,29 23,23 C23,20 21,15 19.5,15 C18.5,15 17.5,16 17.5,18 L17,23 C17,23 16,16.5 15,16.5 C14,16.5 13.5,17.5 13.5,19 L13.5,23 C13.5,23 12,18 11,18 C10,18 9.5,19 9.5,20.5 L10.5,28 C11,32 14,36 17,38 Z" />
+
+    <!-- Left Hand Inner Lines (Gold) -->
+    <path
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"
+        android:pathData="M17,23 V28 M13.5,23 V27" />
+        
+    <!-- Golden Light/Aura in the center -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M24,28 L23,30 L25,30 Z M24,24 L22,25 L24,26 L26,25 Z M24,32 L22,34 L26,34 Z" />
+
+</vector>

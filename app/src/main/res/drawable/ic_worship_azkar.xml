@@ -1,0 +1,71 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Circular Beads Loop in Deep Navy with Soft Gradients / 3D look -->
+    <!-- Bead 1 Top -->
+    <path android:fillColor="#0F2C59" android:pathData="M24,5 A3.5,3.5 0 1,1 23.99,5" />
+    <path android:fillColor="#3B82F6" android:pathData="M23,4 A1,1 0 1,1 22.99,4" />
+
+    <!-- Bead 2 -->
+    <path android:fillColor="#0F2C59" android:pathData="M31.5,7 A3.5,3.5 0 1,1 31.49,7" />
+    <path android:fillColor="#3B82F6" android:pathData="M30.5,6 A1,1 0 1,1 30.49,6" />
+
+    <!-- Bead 3 -->
+    <path android:fillColor="#0F2C59" android:pathData="M37,12.5 A3.5,3.5 0 1,1 36.99,12.5" />
+    <path android:fillColor="#3B82F6" android:pathData="M36,11.5 A1,1 0 1,1 35.99,11.5" />
+
+    <!-- Bead 4 (Gold Separator) -->
+    <path android:fillColor="#D4AF37" android:pathData="M39.5,19.5 A3.2,3.2 0 1,1 39.49,19.5" />
+
+    <!-- Bead 5 -->
+    <path android:fillColor="#0F2C59" android:pathData="M38,27 A3.5,3.5 0 1,1 37.99,27" />
+    <path android:fillColor="#3B82F6" android:pathData="M37,26 A1,1 0 1,1 36.99,26" />
+
+    <!-- Bead 6 -->
+    <path android:fillColor="#0F2C59" android:pathData="M33,33.5 A3.5,3.5 0 1,1 32.99,33.5" />
+    <path android:fillColor="#3B82F6" android:pathData="M32,32.5 A1,1 0 1,1 31.99,32.5" />
+
+    <!-- Bead 7 -->
+    <path android:fillColor="#0F2C59" android:pathData="M25.5,37 A3.5,3.5 0 1,1 25.49,37" />
+    <path android:fillColor="#3B82F6" android:pathData="M24.5,36 A1,1 0 1,1 24.49,36" />
+
+    <!-- Bead 8 -->
+    <path android:fillColor="#0F2C59" android:pathData="M16.5,7 A3.5,3.5 0 1,1 16.49,7" />
+    <path android:fillColor="#3B82F6" android:pathData="M15.5,6 A1,1 0 1,1 15.49,6" />
+
+    <!-- Bead 9 -->
+    <path android:fillColor="#0F2C59" android:pathData="M11,12.5 A3.5,3.5 0 1,1 10.99,12.5" />
+    <path android:fillColor="#3B82F6" android:pathData="M10,11.5 A1,1 0 1,1 9.99,11.5" />
+
+    <!-- Bead 10 (Gold Separator) -->
+    <path android:fillColor="#D4AF37" android:pathData="M8.5,19.5 A3.2,3.2 0 1,1 8.49,19.5" />
+
+    <!-- Bead 11 -->
+    <path android:fillColor="#0F2C59" android:pathData="M10,27 A3.5,3.5 0 1,1 9.99,27" />
+    <path android:fillColor="#3B82F6" android:pathData="M9,26 A1,1 0 1,1 8.99,26" />
+
+    <!-- Bead 12 -->
+    <path android:fillColor="#0F2C59" android:pathData="M15,33.5 A3.5,3.5 0 1,1 14.99,33.5" />
+    <path android:fillColor="#3B82F6" android:pathData="M14,32.5 A1,1 0 1,1 13.99,32.5" />
+
+    <!-- Imamah (Minaret/Head Bead) in Navy and Gold -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M20,36 H28 V38 H20 Z" />
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M21.5,38 H26.5 L25,43 H23 Z" />
+
+    <!-- Gold Ring on Tassel -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M22,43 H26 V44.5 H22 Z" />
+
+    <!-- Hanging Tassel in Navy -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M22,44.5 L20,48 H28 L26,44.5 Z" />
+</vector>

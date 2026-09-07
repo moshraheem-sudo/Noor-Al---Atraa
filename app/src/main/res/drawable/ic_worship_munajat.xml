@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Outer Gold Glow/Accent Line -->
+    <path
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M6,24 C11,13 37,13 42,24 C37,35 11,35 6,24 Z" />
+
+    <!-- Main Eye Shape Outer Outline in Deep Navy -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#0F2C59"
+        android:strokeWidth="3.2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M7,24 C13,14 35,14 41,24 C35,34 13,34 7,24 Z" />
+
+    <!-- Blue Iris -->
+    <path
+        android:fillColor="#2563EB"
+        android:pathData="M24,15.5 A8.5,8.5 0 1,1 23.99,15.5" />
+    
+    <!-- Outer Iris Ring -->
+    <path
+        android:strokeColor="#1E3A8A"
+        android:strokeWidth="1.2"
+        android:fillColor="#00000000"
+        android:pathData="M24,15.5 A8.5,8.5 0 1,1 23.99,15.5" />
+
+    <!-- Dark Center Pupil -->
+    <path
+        android:fillColor="#0F2C59"
+        android:pathData="M24,19.5 A4.5,4.5 0 1,1 23.99,19.5" />
+
+    <!-- White Specular Reflection / Catchlight -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M22,21 A1.8,1.8 0 1,1 21.99,21" />
+</vector>
