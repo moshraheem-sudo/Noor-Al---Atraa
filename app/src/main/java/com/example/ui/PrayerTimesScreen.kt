@@ -119,8 +119,6 @@ fun PrayerApp(
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 )
             )
-        } else {
-            viewModel.locateViaGps(context, forceRefresh = false)
         }
     }
 

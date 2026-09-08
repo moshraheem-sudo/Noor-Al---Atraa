@@ -226,14 +226,14 @@ fun HomeScreen(
                         }
                     }
 
-                    // Elegant Divider
-                    androidx.compose.material3.HorizontalDivider(
-                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
-                        thickness = 1.dp
-                    )
-
                     // GPS Status / feedback message if locating
                     if (gpsStatusMessage != null) {
+                        // Elegant Divider
+                        androidx.compose.material3.HorizontalDivider(
+                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
+                            thickness = 1.dp,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
                         Text(
                             text = AppStrings.translateGpsMessage(gpsStatusMessage, currentLanguage),
                             style = MaterialTheme.typography.labelSmall,
@@ -242,90 +242,6 @@ fun HomeScreen(
                             textAlign = TextAlign.Center,
                             modifier = Modifier.fillMaxWidth()
                         )
-                    }
-
-                    // Integrated Hijri & Gregorian Calendar Section (Full names and years, no truncation, no city button)
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clip(RoundedCornerShape(14.dp))
-                            .background(AppColors.current.tealGlow10)
-                            .border(1.dp, AppColors.current.tealGlow40, RoundedCornerShape(14.dp))
-                            .padding(horizontal = 14.dp, vertical = 10.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        // Hijri Date Row
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Mosque,
-                                    contentDescription = null,
-                                    tint = AppColors.current.tealAccentLight,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Text(
-                                    text = hijriDisplay,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    color = AppColors.current.textTitle,
-                                    fontSize = 13.5.sp
-                                )
-                            }
-                            Text(
-                                text = if (isAr) "هجري" else "Hijri",
-                                style = MaterialTheme.typography.labelSmall,
-                                fontWeight = FontWeight.SemiBold,
-                                color = AppColors.current.tealAccentLight,
-                                fontSize = 11.sp
-                            )
-                        }
-
-                        androidx.compose.material3.HorizontalDivider(
-                            color = AppColors.current.tealGlow20,
-                            thickness = 0.8.dp
-                        )
-
-                        // Gregorian Date Row
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                modifier = Modifier.weight(1f)
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.CalendarToday,
-                                    contentDescription = null,
-                                    tint = AppColors.current.textMuted,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                                Text(
-                                    text = gregorianDisplay,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    fontWeight = FontWeight.Medium,
-                                    color = AppColors.current.textMain,
-                                    fontSize = 12.5.sp
-                                )
-                            }
-                            Text(
-                                text = if (isAr) "ميلادي" else "Gregorian",
-                                style = MaterialTheme.typography.labelSmall,
-                                fontWeight = FontWeight.Normal,
-                                color = AppColors.current.textMuted,
-                                fontSize = 11.sp
-                            )
-                        }
                     }
                 }
             }

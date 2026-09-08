@@ -1188,65 +1188,108 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
                 }
             }
 
-            // Alternating Date Banner (Ad/Ticker style)
+            // Integrated Hijri & Gregorian Calendar Section (Inspired by Prayer Times Screen)
             item {
-                var showHijri by remember { mutableStateOf(true) }
-
-                LaunchedEffect(Unit) {
-                    while (true) {
-                        kotlinx.coroutines.delay(5000)
-                        showHijri = !showHijri
-                    }
-                }
-
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 2.dp, vertical = 1.dp),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = themePrimaryContainer),
-                    border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFFD4AF37).copy(alpha = 0.5f)),
+                        .padding(horizontal = 2.dp, vertical = 2.dp),
+                    shape = RoundedCornerShape(18.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                    border = BorderStroke(1.2.dp, androidx.compose.ui.graphics.Brush.horizontalGradient(
+                        listOf(
+                            androidx.compose.ui.graphics.Color(0xFFD4AF37).copy(alpha = 0.5f),
+                            androidx.compose.ui.graphics.Color(0xFF14B8A6).copy(alpha = 0.5f),
+                            androidx.compose.ui.graphics.Color(0xFFD4AF37).copy(alpha = 0.5f)
+                        )
+                    )),
                     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                 ) {
-                    Box(
+                    Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp, horizontal = 12.dp),
-                        contentAlignment = Alignment.Center
+                            .background(
+                                androidx.compose.ui.graphics.Brush.verticalGradient(
+                                    colors = listOf(
+                                        MaterialTheme.colorScheme.surface,
+                                        MaterialTheme.colorScheme.surfaceVariant
+                                    )
+                                )
+                            )
+                            .padding(horizontal = 14.dp, vertical = 12.dp),
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        androidx.compose.animation.AnimatedContent(
-                            targetState = showHijri,
-                            transitionSpec = {
-                                (androidx.compose.animation.slideInVertically { height -> height } + androidx.compose.animation.fadeIn()) togetherWith
-                                (androidx.compose.animation.slideOutVertically { height -> -height } + androidx.compose.animation.fadeOut())
-                            },
-                            label = "date_banner_transition"
-                        ) { targetShowHijri ->
+                        // Hijri Date Row
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
                             Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Center,
-                                verticalAlignment = Alignment.CenterVertically
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                modifier = Modifier.weight(1f)
                             ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Text(
-                                        text = if (targetShowHijri) "التاريخ الهجري" else "التاريخ الميلادي",
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = themeOnPrimaryContainer.copy(alpha = 0.8f),
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                    Spacer(modifier = Modifier.height(2.dp))
-                                    Text(
-                                        text = if (targetShowHijri) hijriString else gregorianString,
-                                        style = MaterialTheme.typography.titleSmall,
-                                        fontWeight = FontWeight.Bold,
-                                        color = themeOnPrimaryContainer,
-                                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                                    )
-                                }
+                                Icon(
+                                    imageVector = Icons.Default.Mosque,
+                                    contentDescription = null,
+                                    tint = androidx.compose.ui.graphics.Color(0xFFD4AF37),
+                                    modifier = Modifier.size(20.dp)
+                                )
+                                Text(
+                                    text = hijriString,
+                                    style = MaterialTheme.typography.titleSmall,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    fontSize = 14.sp
+                                )
                             }
+                            Text(
+                                text = "هجري",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.SemiBold,
+                                color = androidx.compose.ui.graphics.Color(0xFFD4AF37),
+                                fontSize = 12.sp
+                            )
+                        }
+
+                        androidx.compose.material3.HorizontalDivider(
+                            color = androidx.compose.ui.graphics.Color(0xFFD4AF37).copy(alpha = 0.2f),
+                            thickness = 1.dp
+                        )
+
+                        // Gregorian Date Row
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                modifier = Modifier.weight(1f)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Event,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                                    modifier = Modifier.size(18.dp)
+                                )
+                                Text(
+                                    text = gregorianString,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                                    fontSize = 13.5.sp
+                                )
+                            }
+                            Text(
+                                text = "ميلادي",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Normal,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
+                                fontSize = 12.sp
+                            )
                         }
                     }
                 }
@@ -1281,21 +1324,37 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
                     if (tickerItems.isNotEmpty()) {
                         Card(
                             modifier = Modifier.fillMaxWidth().clickable { navController.navigate(tickerItems[currentTickerIndex].second) },
-                            shape = RoundedCornerShape(16.dp),
-                            colors = CardDefaults.cardColors(containerColor = themeSecondaryContainer),
-                            border = BorderStroke(1.dp, androidx.compose.ui.graphics.Color(0xFFD4AF37).copy(alpha = 0.45f)),
-                            elevation = CardDefaults.cardElevation(1.dp)
+                            shape = RoundedCornerShape(18.dp),
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                            border = BorderStroke(1.2.dp, androidx.compose.ui.graphics.Brush.horizontalGradient(
+                                listOf(
+                                    androidx.compose.ui.graphics.Color(0xFFD4AF37).copy(alpha = 0.65f),
+                                    androidx.compose.ui.graphics.Color(0xFF14B8A6).copy(alpha = 0.75f),
+                                    androidx.compose.ui.graphics.Color(0xFFD4AF37).copy(alpha = 0.65f)
+                                )
+                            )),
+                            elevation = CardDefaults.cardElevation(3.dp)
                         ) {
                             Row(
-                                modifier = Modifier.fillMaxWidth().padding(horizontal = 14.dp, vertical = 10.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(
+                                        androidx.compose.ui.graphics.Brush.verticalGradient(
+                                            colors = listOf(
+                                                MaterialTheme.colorScheme.surfaceVariant,
+                                                MaterialTheme.colorScheme.surface
+                                            )
+                                        )
+                                    )
+                                    .padding(horizontal = 14.dp, vertical = 12.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
                                 Icon(
                                     imageVector = Icons.Filled.Notifications,
                                     contentDescription = null,
-                                    tint = themeTertiary,
-                                    modifier = Modifier.size(16.dp)
+                                    tint = androidx.compose.ui.graphics.Color(0xFFD4AF37),
+                                    modifier = Modifier.size(18.dp)
                                 )
                                 
                                 Column(
@@ -1305,7 +1364,7 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
                                     Text(
                                         text = "أعمال اليوم",
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = themeOnSecondaryContainer.copy(alpha = 0.7f),
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                                         fontWeight = FontWeight.Bold,
                                         textAlign = androidx.compose.ui.text.style.TextAlign.Center
                                     )
@@ -1322,7 +1381,7 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
                                         Text(
                                             text = tickerItems[targetIndex].first,
                                             style = MaterialTheme.typography.titleSmall,
-                                            color = themeOnSecondaryContainer,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
                                             fontWeight = FontWeight.Bold,
                                             textAlign = androidx.compose.ui.text.style.TextAlign.Center
                                         )
@@ -1332,8 +1391,8 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
                                 Icon(
                                     imageVector = Icons.Filled.Notifications,
                                     contentDescription = null,
-                                    tint = themeTertiary,
-                                    modifier = Modifier.size(16.dp)
+                                    tint = androidx.compose.ui.graphics.Color(0xFFD4AF37),
+                                    modifier = Modifier.size(18.dp)
                                 )
                             }
                         }
@@ -1358,18 +1417,13 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
             // قبس من كتاب الله الكريم - متصل مباشرة ببيانات القرآن الكريم
             if (showQabas) {
                 item {
+                    var isQabasExpanded by remember { mutableStateOf(false) }
                     val frameBorderColor = androidx.compose.ui.graphics.Color(0xFFB88E4C)
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 4.dp)
-                            .clickable {
-                                val intent = android.content.Intent(context, com.example.SawtQuranActivity::class.java).apply {
-                                    putExtra("open_surah_id", qabasSurahId)
-                                    putExtra("open_ayah_number", qabasAyahNumber)
-                                }
-                                context.startActivity(intent)
-                            },
+                            .animateContentSize(),
                         shape = RoundedCornerShape(18.dp),
                         colors = CardDefaults.cardColors(containerColor = themePrimaryContainer),
                         border = BorderStroke(1.dp, frameBorderColor.copy(alpha = 0.5f)),
@@ -1381,7 +1435,10 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
                                 .padding(14.dp)
                         ) {
                             Row(
-                                modifier = Modifier.fillMaxWidth(),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable { isQabasExpanded = !isQabasExpanded }
+                                    .padding(vertical = 2.dp),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
@@ -1404,6 +1461,21 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = if (isQabasExpanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                                        contentDescription = if (isQabasExpanded) "طي البطاقة" else "توسيع البطاقة",
+                                        tint = frameBorderColor,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+                            }
+
+                            if (isQabasExpanded) {
+                                Spacer(modifier = Modifier.height(10.dp))
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.End
                                 ) {
                                     IconButton(
                                         onClick = {
@@ -1431,51 +1503,35 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
                                             imageVector = Icons.Filled.Refresh,
                                             contentDescription = "آية أخرى",
                                             tint = themeOnPrimaryContainer,
-                                            modifier = Modifier.size(16.dp)
+                                            modifier = Modifier.size(20.dp)
                                         )
                                     }
-
-                                    Surface(
-                                        shape = RoundedCornerShape(10.dp),
-                                        color = themeSecondaryContainer,
-                                        border = BorderStroke(1.dp, frameBorderColor.copy(alpha = 0.4f))
-                                    ) {
-                                        AnimatedContent(
-                                            targetState = "$qabasSurahName - آية ${qabasAyahNumber.toArabicNumerals()}",
-                                            transitionSpec = {
-                                                fadeIn() togetherWith fadeOut()
-                                            },
-                                            label = "suggested_ayah_ref_transition"
-                                        ) { targetRef ->
-                                            Text(
-                                                text = "سورة $targetRef",
-                                                style = MaterialTheme.typography.labelMedium,
-                                                fontWeight = FontWeight.Bold,
-                                                color = themeOnSecondaryContainer,
-                                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                                             )
-                                        }
-                                    }
                                 }
-                            }
 
-                            Spacer(modifier = Modifier.height(10.dp))
+                                Spacer(modifier = Modifier.height(10.dp))
 
-                            // Authentic Mushaf Frame Box
-                            Surface(
-                                shape = RoundedCornerShape(12.dp),
-                                color = MaterialTheme.colorScheme.surface,
-                                border = BorderStroke(1.5.dp, frameBorderColor.copy(alpha = 0.65f)),
-                                shadowElevation = 1.dp,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(14.dp),
-                                    horizontalAlignment = Alignment.CenterHorizontally
+                                // Authentic Mushaf Frame Box
+                                Surface(
+                                    onClick = {
+                                        val intent = android.content.Intent(context, com.example.SawtQuranActivity::class.java).apply {
+                                            putExtra("open_surah_id", qabasSurahId)
+                                            putExtra("open_ayah_number", qabasAyahNumber)
+                                        }
+                                        context.startActivity(intent)
+                                    },
+                                    shape = RoundedCornerShape(12.dp),
+                                    color = MaterialTheme.colorScheme.surface,
+                                    border = BorderStroke(1.5.dp, frameBorderColor.copy(alpha = 0.65f)),
+                                    shadowElevation = 1.dp,
+                                    modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    // Top Header of Mushaf Page
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(14.dp),
+                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+                                        // Top Header of Mushaf Page
                                     val qabasJuz = com.example.ui.screens.getJuzNumber(qabasSurahId, qabasAyahNumber)
                                     Row(
                                         modifier = Modifier
@@ -1662,6 +1718,7 @@ fun PeopleListScreen(navController: NavHostController, onNavigateToTasbeeh: () -
                     }
                 }
             }
+        }
 
             // 3 Daily Cards
             item {

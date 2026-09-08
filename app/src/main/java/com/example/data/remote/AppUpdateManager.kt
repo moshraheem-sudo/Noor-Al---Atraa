@@ -181,10 +181,38 @@ object AppUpdateManager {
             e.printStackTrace()
         }
 
+        // 3.5 Try resolving from the new Noor-Al---Atraa repo
+        try {
+            val listRequest3 = Request.Builder()
+                .url("https://api.github.com/repos/moshraheem-sudo/Noor-Al---Atraa/releases")
+                .header("User-Agent", "NoorAlAtraApp/${com.example.BuildConfig.VERSION_NAME}")
+                .header("Accept", "application/vnd.github.v3+json")
+                .build()
+            client.newCall(listRequest3).execute().use { response ->
+                if (response.isSuccessful) {
+                    val bodyStr = response.body?.string() ?: ""
+                    val array = org.json.JSONArray(bodyStr)
+                    for (i in 0 until array.length()) {
+                        val rel = array.getJSONObject(i)
+                        val assets = rel.optJSONArray("assets") ?: continue
+                        for (j in 0 until assets.length()) {
+                            val assetUrl = assets.getJSONObject(j).optString("browser_download_url", "")
+                            if (assetUrl.contains(".apk", ignoreCase = true) && !candidates.contains(assetUrl)) {
+                                candidates.add(assetUrl)
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         // 4. Fallback direct URLs
         if (!candidates.contains(QURAN_DIRECT_APK)) candidates.add(QURAN_DIRECT_APK)
         candidates.add("https://github.com/moshraheem-sudo/Sawt-Al-Quran-/releases/latest/download/app-release.apk")
         candidates.add("https://github.com/moshraheem-sudo/Noor-Al-Atra-/releases/latest/download/app-release.apk")
+        candidates.add("https://github.com/moshraheem-sudo/Noor-Al---Atraa/releases/latest/download/app-release.apk")
 
         var downloadSuccess = false
         var lastError = ""
@@ -536,66 +564,90 @@ object AppUpdateManager {
 
     suspend fun checkNourUpdate(): Result<AppReleaseInfo> = withContext(Dispatchers.IO) {
         try {
-            val request = Request.Builder()
+            var request = Request.Builder()
                 .url(NOUR_CHECK_API)
                 .header("User-Agent", "SawtALQuranApp/1.40.0")
                 .header("Accept", "application/vnd.github.v3+json")
                 .build()
 
+            var responseBodyStr = ""
+            var wasSuccessful = false
+
             client.newCall(request).execute().use { response ->
-                if (!response.isSuccessful) {
-                    return@withContext Result.success(
-                        AppReleaseInfo(
-                            appName = NOUR_APP_NAME,
-                            tagName = NOUR_CURRENT_VERSION,
-                            releaseName = "تحديث تطبيق نور العترة",
-                            releaseNotes = "تطبيق نور العترة بالأدعية والتلاوات المباركة.",
-                            downloadUrl = "https://github.com/moshraheem-sudo/Noor-Al-Atra-/releases/latest/download/app-release.apk",
-                            htmlUrl = NOUR_RELEASE_PAGE,
-                            isNewerAvailable = false
-                        )
-                    )
+                if (response.isSuccessful) {
+                    wasSuccessful = true
+                    responseBodyStr = response.body?.string() ?: ""
                 }
+            }
 
-                val bodyStr = response.body?.string() ?: ""
-                val json = JSONObject(bodyStr)
-                val tagName = json.optString("tag_name", NOUR_CURRENT_VERSION)
-                val releaseName = json.optString("name", "تحديث نور العترة")
-                val releaseNotes = json.optString("body", "يتضمن هذا التحديث ميزات ومحتويات جديدة لتطبيق نور العترة.").ifBlank {
-                    "يتضمن هذا التحديث ميزات ومحتويات جديدة لتطبيق نور العترة."
-                }
-                val htmlUrl = json.optString("html_url", NOUR_RELEASE_PAGE)
-
-                var downloadUrl = ""
-                val assets = json.optJSONArray("assets")
-                if (assets != null && assets.length() > 0) {
-                    for (i in 0 until assets.length()) {
-                        val asset = assets.getJSONObject(i)
-                        val assetUrl = asset.optString("browser_download_url", "")
-                        if (assetUrl.isNotEmpty()) {
-                            downloadUrl = assetUrl
-                            break
-                        }
+            // Fallback to the alternative repo if the primary one fails
+            if (!wasSuccessful) {
+                val fallbackApi = "https://api.github.com/repos/moshraheem-sudo/Noor-Al---Atraa/releases/latest"
+                request = Request.Builder()
+                    .url(fallbackApi)
+                    .header("User-Agent", "SawtALQuranApp/1.40.0")
+                    .header("Accept", "application/vnd.github.v3+json")
+                    .build()
+                    
+                client.newCall(request).execute().use { fallbackResponse ->
+                    if (fallbackResponse.isSuccessful) {
+                        wasSuccessful = true
+                        responseBodyStr = fallbackResponse.body?.string() ?: ""
                     }
                 }
-                if (downloadUrl.isEmpty()) {
-                    downloadUrl = "https://github.com/moshraheem-sudo/Noor-Al-Atra-/releases/latest/download/app-release.apk"
-                }
+            }
 
-                val isNewer = isVersionNewer(tagName, NOUR_CURRENT_VERSION)
-
-                Result.success(
+            if (!wasSuccessful) {
+                return@withContext Result.success(
                     AppReleaseInfo(
                         appName = NOUR_APP_NAME,
-                        tagName = tagName,
-                        releaseName = releaseName,
-                        releaseNotes = releaseNotes,
-                        downloadUrl = downloadUrl,
-                        htmlUrl = htmlUrl,
-                        isNewerAvailable = isNewer
+                        tagName = NOUR_CURRENT_VERSION,
+                        releaseName = "تحديث تطبيق نور العترة",
+                        releaseNotes = "تطبيق نور العترة بالأدعية والتلاوات المباركة.",
+                        downloadUrl = "https://github.com/moshraheem-sudo/Noor-Al---Atraa/releases/latest/download/app-release.apk", // Defaulting to the new fallback URL
+                        htmlUrl = "https://github.com/moshraheem-sudo/Noor-Al---Atraa/releases/latest",
+                        isNewerAvailable = false
                     )
                 )
             }
+
+            val json = JSONObject(responseBodyStr)
+            val tagName = json.optString("tag_name", NOUR_CURRENT_VERSION)
+            val releaseName = json.optString("name", "تحديث نور العترة")
+            val releaseNotes = json.optString("body", "يتضمن هذا التحديث ميزات ومحتويات جديدة لتطبيق نور العترة.").ifBlank {
+                "يتضمن هذا التحديث ميزات ومحتويات جديدة لتطبيق نور العترة."
+            }
+            val htmlUrl = json.optString("html_url", "https://github.com/moshraheem-sudo/Noor-Al---Atraa/releases/latest")
+
+            var downloadUrl = ""
+            val assets = json.optJSONArray("assets")
+            if (assets != null && assets.length() > 0) {
+                for (i in 0 until assets.length()) {
+                    val asset = assets.getJSONObject(i)
+                    val assetUrl = asset.optString("browser_download_url", "")
+                    if (assetUrl.isNotEmpty()) {
+                        downloadUrl = assetUrl
+                        break
+                    }
+                }
+            }
+            if (downloadUrl.isEmpty()) {
+                downloadUrl = "https://github.com/moshraheem-sudo/Noor-Al---Atraa/releases/latest/download/app-release.apk"
+            }
+
+            val isNewer = isVersionNewer(tagName, NOUR_CURRENT_VERSION)
+
+            Result.success(
+                AppReleaseInfo(
+                    appName = NOUR_APP_NAME,
+                    tagName = tagName,
+                    releaseName = releaseName,
+                    releaseNotes = releaseNotes,
+                    downloadUrl = downloadUrl,
+                    htmlUrl = htmlUrl,
+                    isNewerAvailable = isNewer
+                )
+            )
         } catch (e: Exception) {
             Result.failure(e)
         }

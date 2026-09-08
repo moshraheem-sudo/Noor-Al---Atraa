@@ -382,6 +382,42 @@ object UpdateChecker {
                         e.printStackTrace()
                     }
                 }
+                
+                // 3. Fallback to Noor-Al---Atraa repository
+                if (highestTag.isEmpty()) {
+                    try {
+                        val fallbackUrl = URL("https://api.github.com/repos/moshraheem-sudo/Noor-Al---Atraa/releases/latest")
+                        val conn = fallbackUrl.openConnection() as HttpURLConnection
+                        conn.requestMethod = "GET"
+                        conn.setRequestProperty("User-Agent", "NoorAlAtraApp/$currentVersion")
+                        conn.setRequestProperty("Accept", "application/vnd.github.v3+json")
+                        conn.connectTimeout = 12000
+                        conn.readTimeout = 12000
+
+                        if (conn.responseCode == 200) {
+                            val jsonString = conn.inputStream.bufferedReader().use { it.readText() }
+                            val jsonObj = JSONObject(jsonString)
+                            val tag = jsonObj.optString("tag_name", "").trim()
+                            val body = jsonObj.optString("body", "").trim()
+                            var apkUrl = ""
+                            val assets = jsonObj.optJSONArray("assets")
+                            if (assets != null) {
+                                for (j in 0 until assets.length()) {
+                                    val urlStr = assets.getJSONObject(j).optString("browser_download_url", "")
+                                    if (urlStr.endsWith(".apk")) {
+                                        apkUrl = urlStr
+                                        break
+                                    }
+                                }
+                            }
+                            highestTag = tag
+                            highestNotes = body
+                            highestApkUrl = apkUrl
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
 
                 // 3. Ensure target baseline version is evaluated if online releases are empty or smaller
                 if (highestTag.isEmpty() || isNewerVersion(targetVersion, highestTag)) {
@@ -394,7 +430,7 @@ object UpdateChecker {
                 // 4. Set fallback APK download URL if none found directly from assets
                 if (highestApkUrl.isEmpty()) {
                     val formattedTag = if (highestTag.startsWith("v", ignoreCase = true)) highestTag else "v$highestTag"
-                    highestApkUrl = "https://github.com/moshraheem-sudo/Noor-Al-Atra-/releases/download/$formattedTag/app-release.apk"
+                    highestApkUrl = "https://github.com/moshraheem-sudo/Noor-Al---Atraa/releases/download/$formattedTag/app-release.apk"
                 }
 
                 // 5. Check if highest release is newer than currently installed app

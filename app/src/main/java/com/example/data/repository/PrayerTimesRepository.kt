@@ -523,7 +523,7 @@ class PrayerTimesRepository(private val context: Context) {
         val province = prefs.getString("city_province", "كربلاء") ?: "كربلاء"
 
         // If saved city has emulator coordinates (e.g. Ukiah / California), reset to Karbala Holy City!
-        if (id.startsWith("gps_") && (lon < -50.0 || (lat in 36.0..42.0 && lon in -125.0..-120.0) || nameAr.contains("Ukiah", ignoreCase = true) || nameEn.contains("Ukiah", ignoreCase = true))) {
+        if (id.startsWith("gps_") && ((lat in 36.0..42.0 && lon in -125.0..-120.0) || nameAr.contains("Ukiah", ignoreCase = true) || nameEn.contains("Ukiah", ignoreCase = true))) {
             prefs.edit().remove("city_id").apply()
             return PredefinedCities.defaultCity
         }
@@ -744,7 +744,7 @@ class PrayerTimesRepository(private val context: Context) {
                     .putLong("last_hijri_sync_time", nowTime)
                     .apply()
 
-                if (notifyUser || (isAuto && isDateChanged)) {
+                if (notifyUser) {
                     try {
                         com.example.utils.PrayerNotificationHelper.showHijriSyncNotification(
                             context = context,
